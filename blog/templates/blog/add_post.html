@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+</head>
+<body>
+    <a href="/blog/">Inicio</a>
+    <form method="POST">
+        {% csrf_token %}
+        <p>Digita un titulo: {{form.title}}</p>
+        <p>Ingresa el contenido: </p>
+        <p>{{form.content}}</p>
+        <p>Selecciona una categoria: {{form.category}}</p>
+        
+        <input type="submit" value="enviar">
+    </form>
+</body>
+</html>

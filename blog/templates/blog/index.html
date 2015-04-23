@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+</head>
+<body>
+    <a href="/blog/">Inicio</a>
+    <a href="create-post/">Crear un post</a>
+    <a href="mis-post/">Mis Post</a><br><br>
+     <form method="get">
+        
+        <input type="text" name="query"/>
+        <input type="submit" value="buscar"/>
+    </form>
+  
+    {% for conte in contenido %}
+        <ul>
+            <li><a href="/blog/view-post/{{conte.id}}">{{conte}} </a><a href="/blog/delete-post/{{conte.id}}">eliminar</a></li>
+        </ul>
+    {% endfor %}
+    
+</body>
+</html>

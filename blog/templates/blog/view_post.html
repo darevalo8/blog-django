@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>{{post.title}}</title>
+</head>
+<body>
+    {% comment %}
+        bueno para recordar si queremos ir a la pagina de inicio
+        y en nuestra url le pusimos el includen de nuestra 
+        app con el nombre en la url ejemplo
+        url(r'^blog/', include('blog.urls'))
+        entonces para ir al inicio solo ponemos /blog/ y ya
+    {% endcomment %}
+    <a href="/blog/">Inicio</a>
+    <section>
+        <article>
+            <h1>{{post.title}}</h1>
+            <p>{{post.content}}</p>
+        </article>
+    </section>
+    <aside>
+        <p>acerca del autor:</p>
+        <p>Mi nombre es {{post.user.first_name}}, {{post.user.about}}</p>
+    </aside>
+    <a href="/blog/edit-post/{{post.id}}">editar</a>
+</body>
+</html>

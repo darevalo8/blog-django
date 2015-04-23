@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+</head>
+<body>
+    <h2>Edita</h2>
+    {{post.title}}
+    <form method="post">
+        {% csrf_token %}
+        {{ form }}
+    <input type="submit" value="enviar"/>
+</form>
+</body>
+</html>

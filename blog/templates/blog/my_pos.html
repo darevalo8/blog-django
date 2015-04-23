@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcomen</title>
+</head>
+<body>
+    <h1>mis post </h1>
+    <a href="/blog/">Inicio</a>
+    <a href="/blog/mis-post/">Atras</a><br><br>
+    <form method="get">
+        
+        <input type="text" name="query"/>
+        <input type="submit" value="buscar"/>
+    </form>
+    {% for post in mypost  %}
+        <ul>
+            <li><a href="/blog/view-post/{{post.id}}">{{post}} </a>
+                <a href="/blog/delete-post/{{post.id}}">Eliminar</a>
+            </li>
+        </ul>
+    {% endfor %}
+</body>
+</html>
