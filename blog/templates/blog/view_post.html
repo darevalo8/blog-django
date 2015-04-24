@@ -24,6 +24,23 @@
         <p>acerca del autor:</p>
         <p>Mi nombre es {{post.user.first_name}}, {{post.user.about}}</p>
     </aside>
+        <br>
+    <h3>Comentarios</h3>
+        <br>
+    <article>
+        {% for comentarios in comentari %}
+            <p>{{comentarios.user}} dice: </p>
+            <p>{{comentarios.commentary}}</p>
+        {% endfor %}
+    </article>
+    <form  method="post">
+        {% csrf_token %}
+            {{form.commentary}}
+            <br>
+        <input type="submit" value="comentar">
+    </form>
+
+    <br>
     <a href="/blog/edit-post/{{post.id}}">editar</a>
 </body>
 </html>

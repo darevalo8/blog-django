@@ -6,11 +6,20 @@
 </head>
 <body>
     <h2>Edita</h2>
-    {{post.title}}
-    <form method="post">
-        {% csrf_token %}
-        {{ form }}
-    <input type="submit" value="enviar"/>
+    <a href="/blog/">Inicio</a>
+        <br>
+    {% if form %}
+        
+    
+        {{post.title}}
+        <form method="post">
+            {% csrf_token %}
+            {{ form }}
+        <input type="submit" value="enviar"/>
+    {% else %}
+
+        <p>Lo siento no Puedes Editar este Post :( no te pertenece</p>
+    {% endif %}
 </form>
 </body>
 </html>

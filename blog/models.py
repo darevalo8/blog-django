@@ -36,5 +36,5 @@ class Comment(models.Model):
 
 
     def __str__(self):
-        return self.post
+        return str(self.post)
         

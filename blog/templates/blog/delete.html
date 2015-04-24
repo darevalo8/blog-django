@@ -5,11 +5,16 @@
     <title>Welcome</title>
 </head>
 <body>
-    <form method="post">
+    {% if post %}
+        <form method="post">
         {% csrf_token %}
-        <p>seguro quieres borrar este post </p>
-        {{post.title}}
-        <input type="submit" value="Eliminar">
-    </form>
+            <p>seguro quieres borrar este post </p>
+            {{post.title}}
+            <input type="submit" value="Eliminar">
+        </form>
+    {% else %}
+        <p>No puedes eliminar este post no te pertenece atrevido :D</p>
+    {% endif %}
+    
 </body>
 </html>
