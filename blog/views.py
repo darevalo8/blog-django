@@ -29,31 +29,24 @@ def view_post(request, **kwargs):
     #tengo que hacerlo en la view_post ya que tengo el id
     #del post que es lo mas importante
     if request.method == 'POST':
-
-
         comentario = CommentForm(request.POST)
 
         if comentario.is_valid():
-
             coment = comentario.save(commit=False)
-
             coment.post = post
             coment.user = request.user.userprofile
             coment.save()
     else:
-
         comentario = CommentForm()
-
     return render(request, 'blog/view_post.html', {'post': post, 'form': comentario, 'comentari': comenta})
 
 
 @login_required
 def create_post(request):
-
     if request.method == 'POST':
         form = CreatePostForm(request.POST)
-        if form.is_valid():
 
+        if form.is_valid():
             foma = form.save(commit=False)
             foma.user = request.user.userprofile
             foma.fecha = datetime.datetime.now()
@@ -72,14 +65,15 @@ def edit_post(request, **kwargs):
     post = Post.objects.get(pk=pk)
     #este primer if es para verificar que solo el dueño del post puede editarlo
     if post.user == user:
+
         if request.method == 'POST':
             form = CreatePostForm(request.POST, instance=post)
             #el instance en esta linea es para mandar el id del post a editar
+
             if form.is_valid():
                 form.save()
                 #form = CreatePostForm()
                 return redirect('/blog/')
-
         else:
             #poner esto aca
             form = CreatePostForm(instance=post)
@@ -95,9 +89,9 @@ def delete_post(request, **kwargs):
     user = request.user.userprofile
     post = Post.objects.get(pk=pk)
     if post.user == user:
+
         if request.method == 'POST':
             post.delete()
-
             return redirect('/blog/')
     else:
         post = None
@@ -119,91 +113,49 @@ def register(request):
     registered = False
 
     if request.method == 'POST':
-
         user_form = UserForm(data=request.POST)
         user_pro = UserProfileForm(data=request.POST)
 
         if user_form.is_valid() and user_pro.is_valid():
-
             user = user_form.save()
-
             user.set_password(user.password)
             user.save()
-
             profile = user_pro.save(commit=False)
-
             profile.user = user
             profile.save()
-
             registered = True
-
         else:
             print("hay error")
 
     else:
         user_form = UserForm()
         user_pro = UserProfileForm()
-
     return render(request, 'blog/registro.html', {'user': user_form, 'profile': user_pro,
                 'registrado': registered})
 
 
 def user_login(request):
     if request.method == 'POST':
-
         username = request.POST.get('username')
         password = request.POST.get('password')
-
-        #
         user = authenticate(username=username, password=password)
 
         if user:
 
             if user.is_active:
-
                 login(request, user)
-
                 return redirect('/blog/')
-
             else:
-
                 return HttpResponse("no estas activa")
 
         else:
             print("problemas")
     else:
         pass
-
     return render(request, 'blog/login.html', {})
 
 
 @login_required
 def user_logout(request):
-
     logout(request)
-
     return redirect("/blog/login")
-
-
-
-# def add_comentarie(request, **kwargs):
-
-#     pk = kwargs.get('pk')
-#     pos = Post.objects.get(pk=pk)
-
-#     if request.method == 'POST':
-
-#         comentario = CommentForm(request.POST)
-
-#         if comentario.is_valid():
-
-#             coment = comentario.save(commit=False)
-
-#             coment.post = pos
-#             coment.user = request.user.userprofile
-#     else:
-
-#         comentario = CommentForm()
-
-#     return render(request, 'blog/view_post.html', {'form': comentario})
-
